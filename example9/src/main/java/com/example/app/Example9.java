@@ -17,6 +17,7 @@ public class Example9 {
         Person person = context.getBean("person", Person.class);
         System.out.println(vehicle.getName());
         System.out.println(person.getName());
+        System.out.println(person.getVehicle().getName());
 
     }
 }
