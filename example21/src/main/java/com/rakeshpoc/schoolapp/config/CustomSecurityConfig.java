@@ -22,7 +22,7 @@ public class CustomSecurityConfig {
                 .httpBasic(Customizer.withDefaults());*/
 
         httpSecurity
-                .csrf(csrf-> csrf.disable())
+                .csrf(csrf-> csrf.ignoringRequestMatchers("/saveMsg"))
                 .authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/dashboard").authenticated()
@@ -33,6 +33,7 @@ public class CustomSecurityConfig {
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/logout").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                 ).formLogin(login-> login.loginPage("/login")
                         .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll())
