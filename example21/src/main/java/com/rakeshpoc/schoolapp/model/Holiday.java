@@ -2,9 +2,8 @@ package com.rakeshpoc.schoolapp.model;
 
 import lombok.*;
 
-@Getter
-@AllArgsConstructor
-public class Holiday {
+@Data
+public class Holiday extends BaseEntity{
 
     private   String day;
     private   String reason;

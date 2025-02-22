@@ -1,5 +1,6 @@
 package com.rakeshpoc.schoolapp.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -26,6 +27,8 @@ public class CustomSecurityConfig {
                 .authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/displayMessages").hasRole("ADMIN")
+                        .requestMatchers("/closeMsg").hasRole("ADMIN")
                         .requestMatchers("/","/home").permitAll()
                         .requestMatchers("/holidays/**").permitAll()
                         .requestMatchers("/contact").permitAll()
@@ -55,7 +58,7 @@ public class CustomSecurityConfig {
         UserDetails admin=User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("pwd")
-                .roles("USER","ADMIN")
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(user,admin);
