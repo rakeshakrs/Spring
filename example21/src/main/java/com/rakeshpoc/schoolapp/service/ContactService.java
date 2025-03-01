@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ContactService {
@@ -21,23 +22,26 @@ public class ContactService {
     public boolean saveMessageDetails(Contact contact){
         boolean isSaved=false;
         contact.setStatus(String.valueOf(SchoolConstants.OPEN));
-        contact.setCreatedBy(String.valueOf(SchoolConstants.ANONYMOUS));
-        contact.setCreatedAt(LocalDateTime.now());
-        int result=contactRepository.saveContact(contact);
-        if(result>0){
+        Contact result=contactRepository.save(contact);
+        if(null != result && (result.getContactId()>0)){
             isSaved=true;
         }
         return isSaved;
     }
 
     public List<Contact> findMsgsWithOpenStatus(){
-        return contactRepository.displayContactMessages(String.valueOf(SchoolConstants.OPEN));
+        return contactRepository.findByStatus(String.valueOf(SchoolConstants.OPEN));
     }
 
-    public boolean isContactUpdated(int id, String updatedBy){
+    public boolean isContactUpdated(int id){
         boolean isUpdated=false;
-        int result=contactRepository.updateContact(id,String.valueOf(SchoolConstants.CLOSE),updatedBy);
-        if(result>0){
+        Optional<Contact> contact = contactRepository.findById(id);
+        contact.ifPresent(contact1 ->{
+                contact1.setStatus(String.valueOf(SchoolConstants.CLOSE));
+
+    });
+        Contact result=contactRepository.save(contact.get());
+        if(null != result && (result.getContactId()>0)){
             isUpdated=true;
         }
         return isUpdated;

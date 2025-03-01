@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Controller
@@ -34,12 +35,13 @@ public class HolidaysController {
             model.addAttribute("festival", false);
             model.addAttribute("federal", true);
         }
-        List<Holiday> holidays =holidaysRepository.displayHolidays();
+        Iterable<Holiday> holidays =holidaysRepository.findAll();
 
         Holiday.Type[] types=Holiday.Type.values();
+        List<Holiday> holidayList = StreamSupport.stream(holidays.spliterator(), false).toList();
         for(Holiday.Type type : types){
             model.addAttribute(type.toString(),
-                    holidays.stream().filter(holiday->holiday.getType().equals(type)).collect(Collectors.toList()));
+                    holidayList.stream().filter(holiday->holiday.getType().equals(type)).collect(Collectors.toList()));
         }
         return "holidays.html";
     }
