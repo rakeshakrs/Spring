@@ -1,5 +1,5 @@
 package com.rakeshpoc.schoolapp.constants;
 
 public enum SchoolConstants {
-    OPEN,CLOSE
+    OPEN,CLOSE,STUDENT,ADMIN
 }
