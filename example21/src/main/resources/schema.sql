@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_by` varchar(50) DEFAULT NULL,
    PRIMARY KEY (`role_id`)
 );
+);
 
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int NOT NULL AUTO_INCREMENT,
