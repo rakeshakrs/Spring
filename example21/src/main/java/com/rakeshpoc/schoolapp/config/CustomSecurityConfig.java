@@ -35,6 +35,8 @@ public class CustomSecurityConfig {
                         .requestMatchers("/","/home").permitAll()
                         .requestMatchers("/holidays/**").permitAll()
                         .requestMatchers("/contact").permitAll()
+                        .requestMatchers("/displayProfile").authenticated()
+                        .requestMatchers("/updateProfile").authenticated()
                         .requestMatchers("/saveMsg").permitAll()
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/courses").permitAll()

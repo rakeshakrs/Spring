@@ -29,6 +29,6 @@ public class Address {
     private String state;
     @NotBlank
     @Pattern(regexp = "(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
-    private int zipcode;
+    private String zipcode;
 
 }

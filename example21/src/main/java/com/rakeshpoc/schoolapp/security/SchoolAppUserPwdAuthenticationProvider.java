@@ -32,7 +32,7 @@ public class SchoolAppUserPwdAuthenticationProvider implements AuthenticationPro
         String pwd=authentication.getCredentials().toString();
         Person person=personRepository.getByEmail(email);
         if(null !=person && person.getPersonId()>0 && passwordEncoder.matches(pwd,person.getPwd())){
-            return new UsernamePasswordAuthenticationToken(person.getName(),pwd,getGrantedAuthorities(person.getRoles()));
+            return new UsernamePasswordAuthenticationToken(email,pwd,getGrantedAuthorities(person.getRoles()));
         }else {
             throw new BadCredentialsException("Invalid cred");
         }
