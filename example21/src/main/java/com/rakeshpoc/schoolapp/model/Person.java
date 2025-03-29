@@ -4,6 +4,8 @@ package com.rakeshpoc.schoolapp.model;
 import com.rakeshpoc.schoolapp.annotations.FieldsValueMatch;
 import com.rakeshpoc.schoolapp.annotations.PasswordValidator;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
@@ -12,7 +14,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Data
+@Getter@Setter
 @Entity
 @FieldsValueMatch.List({
         @FieldsValueMatch(
@@ -67,5 +69,9 @@ public class Person extends BaseEntity{
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,targetEntity = Roles.class)
     @JoinColumn(name = "role_id",referencedColumnName = "roleId",nullable = false)
     private Roles roles;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="class_id", referencedColumnName = "classId", nullable=true)
+    private EazyClass eazyClass;
 
 }
