@@ -6,6 +6,10 @@ import com.rakeshpoc.schoolapp.repository.ContactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -31,6 +35,13 @@ public class ContactService {
 
     public List<Contact> findMsgsWithOpenStatus(){
         return contactRepository.findByStatus(String.valueOf(SchoolConstants.OPEN));
+    }
+
+    public Page<Contact> findMsgsWithStatus(int pageNum,String sortField,String sortDir){
+        int pageSize=5;
+        Pageable pageable= PageRequest.of(pageNum-1,pageSize,
+                sortDir.equals("asc")? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+        return contactRepository.findByStatus(String.valueOf(SchoolConstants.OPEN), pageable);
     }
 
     public boolean isContactUpdated(int id){

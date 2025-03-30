@@ -30,8 +30,8 @@ public class CustomSecurityConfig {
                 .authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/displayMessages").hasRole("ADMIN")
-                        .requestMatchers("/closeMsg").hasRole("ADMIN")
+                        .requestMatchers("/displayMessages/**").hasRole("ADMIN")
+                        .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/","/home").permitAll()
