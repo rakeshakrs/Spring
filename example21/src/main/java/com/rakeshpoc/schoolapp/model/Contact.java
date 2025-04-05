@@ -1,5 +1,6 @@
 package com.rakeshpoc.schoolapp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -36,6 +37,7 @@ public class Contact extends BaseEntity{
     private int contactId;
     @NotBlank(message = "Name should not be blank")
     @Size(min = 3,message = "Name must be atleast 3 char long")
+    @JsonProperty("contactName")
     private String name;
     @NotBlank(message = "Mobile Number should not be blank")
     @Pattern(regexp = "(^$|[0-9]{10})",message = "Mobile Number must 10 digit")

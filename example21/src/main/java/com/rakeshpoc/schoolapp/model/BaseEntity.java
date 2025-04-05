@@ -1,5 +1,7 @@
 package com.rakeshpoc.schoolapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -15,12 +17,15 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt","updatedAt"})
 public class BaseEntity {
     @CreatedDate
     @Column(updatable = false)
+   // @JsonIgnore
     private LocalDateTime createdAt;
     @CreatedBy
     @Column(updatable = false)
+    //@JsonIgnore
     private String createdBy;
     @LastModifiedDate
     @Column(insertable = false)
