@@ -28,13 +28,15 @@ public class CustomSecurityConfig {
                 .csrf(csrf-> csrf.ignoringRequestMatchers("/saveMsg")
                         .ignoringRequestMatchers("/public/**")
                         .ignoringRequestMatchers("/api/**")
-                        .ignoringRequestMatchers("/data-api/**"))
+                        .ignoringRequestMatchers("/data-api/**")
+                        .ignoringRequestMatchers("/schoolapp/actuator/**"))
                 .authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/schoolapp/actuator/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/","/home").permitAll()
                         .requestMatchers("/holidays/**").permitAll()
