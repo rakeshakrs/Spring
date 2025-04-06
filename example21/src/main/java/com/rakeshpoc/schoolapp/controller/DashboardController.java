@@ -24,6 +24,15 @@ public class DashboardController {
         model.addAttribute("username",person.getName());
         model.addAttribute("roles",authentication.getAuthorities().toString());
         //throw new RuntimeException("Its been a good day");
-         return "dashboard.html";
+        logMessages();
+        return "dashboard.html";
+    }
+
+    private void logMessages(){
+        log.error("error log");
+        log.warn("warn log");
+        log.info("info log");
+        log.debug("debug log");
+        log.trace("trace log");
     }
 }

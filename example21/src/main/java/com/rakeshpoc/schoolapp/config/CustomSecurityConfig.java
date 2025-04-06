@@ -27,7 +27,8 @@ public class CustomSecurityConfig {
         httpSecurity
                 .csrf(csrf-> csrf.ignoringRequestMatchers("/saveMsg")
                         .ignoringRequestMatchers("/public/**")
-                        .ignoringRequestMatchers("/api/**"))
+                        .ignoringRequestMatchers("/api/**")
+                        .ignoringRequestMatchers("/data-api/**"))
                 .authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/dashboard").authenticated()
@@ -39,6 +40,7 @@ public class CustomSecurityConfig {
                         .requestMatchers("/holidays/**").permitAll()
                         .requestMatchers("/contact").permitAll()
                         .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/data-api/**").authenticated()
                         .requestMatchers("/displayProfile").authenticated()
                         .requestMatchers("/updateProfile").authenticated()
                         .requestMatchers("/saveMsg").permitAll()
