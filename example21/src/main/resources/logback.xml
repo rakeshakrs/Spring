@@ -39,7 +39,7 @@
     </root>
 
     <!-- LOG "com.eazybytes.eazyschool*" at ERROR level -->
-    <logger name="com.rakeshpoc.schoolapp" level="error" additivity="false">
+    <logger name="com.rakeshpoc.schoolapp" level="info" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
